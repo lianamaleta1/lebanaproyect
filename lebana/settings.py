@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'lebanapost',
         'USER' : 'root',
         'PASSWORD' : '',
-        'HOST' : '12.0.0.1',
+        'HOST' : '127.0.0.1',
         'PORT' : '3306', 
         'STORAGE_ENGINE' : 'INNODB'
    

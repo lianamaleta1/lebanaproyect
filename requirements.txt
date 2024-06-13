@@ -6,4 +6,5 @@ django-cors-headers==4.3.1
 pillow==10.3
 django-ckeditor==6.7.1
 psycopg2==2.9.9
+mysqlcliente==2.2.4
 

@@ -1,3 +1,89 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+
+
+class Usuario (models.Model): 
+    usuario= models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
+    direccion=models.CharField( max_length=100,null=True,blank=True)
+    ciudad=models.CharField( max_length=100,null=True,blank=True)
+    estado=models.CharField( max_length=100,null=True,blank=True)
+    telefono=models.IntegerField( max_length=100,null=True,blank=True)
+    nro_cliente=models.CharField( max_length=100,null=True,blank=True)
+    
+    def __str__(self):
+        return u'{}'.format(self.usuario)
+    
+    class Meta:
+        verbose_name= 'usuario'
+        verbose_name_plural = 'usuarios'
+        db_table = 'usuario'
+ 
+class Paquete (models.Model):
+    
+    numrastreo = models.CharField( max_length=100,default="")#seria como el tracking
+    fecha_compra = models.DateField( max_length=2000, blank= True,null=True)
+    usuario= models.ForeignKey(Usuario, on_delete=models.RESTRICT, null=True, blank=True)
+    identificado=models.BooleanField(default=False)
+    tienda_procedente =models.DateField( max_length=2000, blank= True,null=True)
+
+    
+    def __str__(self):
+        return f"{self.numrastreo}"
+    
+    class Meta:
+        verbose_name= 'paquete'
+        verbose_name_plural = 'Paquetes'
+        db_table = 'paquete'
+  
+class categoriaProducto (models.Model):
+    
+    nombre = models.CharField( max_length=100,default="")
+ 
+    def __str__(self):
+        return f"{self.nombre}"
+    class Meta:
+        verbose_name= 'categoriaProducto'
+        db_table = 'categoriaProducto'
+              
+class Productos (models.Model):
+    
+    nombre = models.CharField( max_length=100,default="")
+    paquete= models.ForeignKey(Paquete, on_delete=models.RESTRICT, null=False, blank=False)
+    categoriaProducto= models.ForeignKey(categoriaProducto, on_delete=models.RESTRICT, null=False, blank=False)
+    
+    def __str__(self):
+        return f"{self.nombre}"
+    
+    class Meta:
+        verbose_name= 'productos'
+        verbose_name_plural = 'productos'
+        db_table = 'productos'   
+         
+
+class categoriAlmacen (models.Model):
+    
+    nombre = models.CharField( max_length=100,default="")
+ 
+    def __str__(self):
+        return f"{self.nombre}"
+    class Meta:
+        verbose_name= 'categoriAlmacen'
+        db_table = 'categoriAlmacen'
+              
+class Almacen (models.Model):
+    
+    nombre = models.CharField( max_length=100,default="")
+    categoria_almaceb = models.ForeignKey(categoriAlmacen, on_delete=models.RESTRICT, null=False, blank=False)
+
+   
+    def __unicode__(self):
+        return self.nombre
+    
+    def __str__(self):
+        return f"{self.nombre}"
+    class Meta:
+        verbose_name= 'paquete'
+        verbose_name_plural = 'Paquetes'
+        db_table = 'paquete'
