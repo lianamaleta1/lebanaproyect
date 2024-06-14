@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificados Digitales</title>
+ 
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
+  <!-- Ionicons -->   
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css'%}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap-datetimepicker.min.css'%}">
+
+    <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'%}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css'%}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css'%}">
+  <link rel="stylesheet" href="{% static 'select.dataTables.min.css'%}">
+  <link rel="stylesheet" href="{% static 'jquery.dataTables.min.css'%}">
+  <link rel="stylesheet" href="{% static 'fixedHeader.dataTables.min.css'%}">
+  
+ 
+  <!-- TOASTR -->
+  <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css'%}">
+  <link rel="stylesheet" href="{% static 'vendor/select2/css/select2.min.css'%}"> 
+  <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap-fileinput/bootstrap-fileinput.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/notiflix-3.2.4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}"> 
+   <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" > -->
+   <!-- Boostrap icons -->
+   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-icons.css' %}">
+  <!-- JS -->
+  <script src="{% static 'js/jquery-1.9.1.js' %}"></script>
+  <script src="{% static 'js/jquery.cookie.min.js' %}"></script>
+ 
+  
+  <!-- <script src="{% static 'js/dataTables.fixedHeader.min.js'%}"></script>  -->
+<!-- Form -->
+  <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+  
+
+ 
+</head>
+{% if user.is_authenticated %}
+<body class="hold-transition layout-top-nav text-sm layout-navbar-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+<nav class="main-header navbar navbar-expand-md navbar-white navbar-light">
+    <!-- Left navbar links -->
+    
+ <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="/dashboard/" class="nav-link">
+            <i class="fas fa-home"></i>
+            Certificados Digitales</a>
+          </li>
+        
+            <li class="nav-item">
+              <a  href="{% url 'listadpquetes' %}" class="nav-link"> Paquetes</a>
+           </li>  
+                 
+        
+        </ul>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search 
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      -->
+      <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+            <i class="far fa-bell"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+            <span class="dropdown-header">Notificaciones</span>
+            <div class="dropdown-divider"></div>
+            <a href="javascript:;" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> Alertas de vencimiento por correo
+              <span class="float-right text-muted text-sm">
+                {% if request.user.trabajador.notificar == 'si' %} 
+                        <i class="fa fa-check" id="notificacion_activada" style="color: #17a2b8"></i>
+                {%else%}
+                        <i class="fa fa-times" id="notificacion_desactivada" style="color: #dc3545;"></i>
+                {%endif%}</span>
+            </a>
+            {% if request.user.trabajador.notificar == 'si' %} 
+            <a href="javascript:;" onclick="notificar()" class="dropdown-item dropdown-footer">Desactivar</a>
+            {%else%}
+            <a href="javascript:;" onclick="notificar()" class="dropdown-item dropdown-footer">Activar</a>
+            {%endif%}
+          </div>
+        </li>
+      {% comment %}
+      {% if user.is_superuser or user.is_staff %}
+          <li class="nav-item">
+           <a class="nav-link"  href="" role="button">
+            <i class="fas fa-tachometer-alt"></i> Administrador
+           </a>
+          </li>
+      {%endif%}
+
+      {% endcomment %}
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:;"role="button">
+          <i class="fas fa-user"></i>  {{ user.username }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:;"role="button">
+          <i class="fas fa-user"></i>  {{ user.groups.first.name }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}" role="button">
+          <i class="fas fa-power-off"></i> Salir
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+  
+  <!-- Main Sidebar Container -->
+   
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" id="app">
+    <!-- Content Header (Page header) -->
+
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+
+        <!-- /.row -->
+        <!-- Main row -->
+         
+         <!-- <router-view > -->
+         {%block content %}
+         
+         {% endblock %}
+
+
+         <!-- </router-view> -->
+        
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!--
+  <footer class="main-footer">
+    <strong>Desarrollado por Juan Manuel Cabo González
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0
+    </div>
+  </footer>
+  --> 
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js'%}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js'%}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js'%}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js'%}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js'%}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js'%}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js'%}"></script>
+<script src="{% static 'dataTables.select.min.js'%}"></script>
+<script src="{% static 'plugins/notiflix-3.2.4.min.js'%}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+<script src="{% static 'plugins/moment/moment.min.js'%}"></script> 
+<script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'%}"></script>
+<script src="{% static 'admin/es.js'%}"></script> 
+<!-- TOASTR -->
+<script src="{% static 'plugins/toastr/toastr.min.js'%}"></script>
+
+<script src="{% static 'vendor/select2/js/select2.min.js'%}"></script>
+<!-- Componentes VUE
+
+<script src="{% static 'vue/axios.js'%}"></script>
+<script src="{% static 'vue/vue.min.js'%}"></script>
+<script src="{% static 'vue/http-vue-loader.js'%}"></script>
+<script src="{% static 'vue/vue-router.min.js'%}"></script>
+<script src="{% static 'vue/index.js'%}"></script>
+-->
+
+<!-- AdminLTE for demo purposes -->
+
+<!--<script src="{% static 'dist/js/demo.js'%}"></script>-->
+<script type="text/javascript">
+/*
+  function modal_firma(){
+   $('#modal-editar-firma').modal('show'); 
+  }
+
+  function notificar(){
+    var url='https://'+document.location.hostname+':'+document.location.port+'/solicitud_pago/sistema/notificar/';
+        axios.get(url).then(response => {
+        window.location='/solicitud_pago';
+    }).catch(error => {});
+  }*/
+
+</script>
+</body>
+{%else%}
+<a href="{% url 'login'%}">Autentiquese</a>
+{% endif %} 
+</html>

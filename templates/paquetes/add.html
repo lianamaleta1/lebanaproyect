@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Esta es la plantilla de solicitudes{% endblock %}
+
+
+{% block content %}
+<script>
+    $(function() {
+        
+        $( "#id_fecha_emision" ).datepicker({
+            inline: false,
+            dateFormat: 'dd/mm/yy' 
+        });    
+
+        $( "#id_fecha_expiracion" ).datepicker({
+            inline: false,
+            dateFormat: 'dd-mm-yy' 
+        }); 
+            
+    });
+  </script>
+  <h3 for="" style="position: relative;left: 769px;top: 19px;">Registro de nuevo paquete:</h3>
+ 
+            
+                    {% if form_search.search_ci.errors %}
+                    <div class="alert alert-danger alert-dismissible" style= "width: 27%">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+                   Falta algo
+                    </div>
+                    {% endif %}  
+ 
+       {% if form %} 
+       <!-- {{form.as_p}}--> 
+            <form action="{% url 'addpquetes' %}" method="post" id="paquete" enctype="multipart/form-data">
+                {% csrf_token %}           
+               <div class="row">
+                    <div class="col-md-4 col-md-offset-2 text-center">
+
+                            <label for="">Cliente:</label>
+                            <div class="form-group">
+                            {{form.usuario}}
+                            
+                            </div>
+                        
+                            <label for="" >Número de restreo:</label>                         
+                            <div class="form-group">
+                                {{form.numrastreo}}
+                            
+                    
+                            </div>
+                        
+                            <label for="" >Identificado:</label>
+                            <div class="form-group">
+                                {{form.identificado}}
+                            </div>
+
+                            
+                            <label for="">Tienda procedente:</label>
+                            <div class="form-group">
+                                {{form.tienda_procedente}}
+                        
+                            </div>
+
+
+
+                    </div>
+                   
+            </div> 
+               
+             </form>
+         
+         <div class="botones">
+            <button type="submit" class="btn btn-success">Enviar</button>
+            
+            <a type="submit" class="btn btn-warning" href="{%url 'listadpquetes' %}">Cancelar</a>
+        </div>
+            {% endif %}  
+   
+           
+{% endblock %}  
+
