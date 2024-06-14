@@ -6,10 +6,13 @@ from django.contrib.auth.models import User
 
 class Usuario (models.Model): 
     usuario= models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
+    username=models.CharField( max_length=100,null=True,blank=True)
+    first_name=models.CharField( max_length=100,null=True,blank=True)
+    last_name=models.CharField( max_length=100,null=True,blank=True)
     direccion=models.CharField( max_length=100,null=True,blank=True)
     ciudad=models.CharField( max_length=100,null=True,blank=True)
     estado=models.CharField( max_length=100,null=True,blank=True)
-    telefono=models.IntegerField( max_length=100,null=True,blank=True)
+    telefono=models.IntegerField( null=True,blank=True)
     nro_cliente=models.CharField( max_length=100,null=True,blank=True)
     
     def __str__(self):
@@ -84,6 +87,6 @@ class Almacen (models.Model):
     def __str__(self):
         return f"{self.nombre}"
     class Meta:
-        verbose_name= 'paquete'
-        verbose_name_plural = 'Paquetes'
-        db_table = 'paquete'
+        verbose_name= 'Almacen'
+        verbose_name_plural = 'Almacenes'
+        db_table = 'almacen'
