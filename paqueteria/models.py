@@ -25,10 +25,11 @@ class Usuario (models.Model):
  
 class Paquete (models.Model):
     
+    validez=[(1,'Si'),(2,'No')]
     numrastreo = models.CharField( max_length=100,default="")#seria como el tracking
     fecha_compra = models.DateField( max_length=2000, blank= True,null=True)
     usuario= models.ForeignKey(Usuario, on_delete=models.RESTRICT, null=True, blank=True)
-    identificado=models.BooleanField(default=False)
+    identificado=models.IntegerField(default='2',choices=validez)
     tienda_procedente =models.DateField( max_length=2000, blank= True,null=True)
 
     
