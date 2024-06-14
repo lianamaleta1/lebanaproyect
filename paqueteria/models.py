@@ -12,11 +12,11 @@ class Usuario (models.Model):
     direccion=models.CharField( max_length=100,null=True,blank=True)
     ciudad=models.CharField( max_length=100,null=True,blank=True)
     estado=models.CharField( max_length=100,null=True,blank=True)
-    telefono=models.IntegerField( null=True,blank=True)
+    telefono=models.CharField(max_length=100, null=True,blank=True)
     nro_cliente=models.CharField( max_length=100,null=True,blank=True)
     
     def __str__(self):
-        return u'{}'.format(self.usuario)
+        return self.username
     
     class Meta:
         verbose_name= 'usuario'
@@ -30,7 +30,7 @@ class Paquete (models.Model):
     fecha_compra = models.DateField( max_length=2000, blank= True,null=True)
     usuario= models.ForeignKey(Usuario, on_delete=models.RESTRICT, null=True, blank=True)
     identificado=models.IntegerField(default='2',choices=validez)
-    tienda_procedente =models.DateField( max_length=2000, blank= True,null=True)
+    tienda_procedente =models.CharField( max_length=2000, blank= True,null=True)
 
     
     def __str__(self):

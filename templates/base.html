@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Certificados Digitales</title>
+  <title>Lebanapost</title>
  
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
   <!-- Ionicons -->   
@@ -59,7 +59,7 @@
           <li class="nav-item">
             <a href="/dashboard/" class="nav-link">
             <i class="fas fa-home"></i>
-            Certificados Digitales</a>
+           Lebanapost</a>
           </li>
         
             <li class="nav-item">
@@ -77,29 +77,7 @@
         </a>
       </li>
       -->
-      <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
-            <i class="far fa-bell"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-            <span class="dropdown-header">Notificaciones</span>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:;" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> Alertas de vencimiento por correo
-              <span class="float-right text-muted text-sm">
-                {% if request.user.trabajador.notificar == 'si' %} 
-                        <i class="fa fa-check" id="notificacion_activada" style="color: #17a2b8"></i>
-                {%else%}
-                        <i class="fa fa-times" id="notificacion_desactivada" style="color: #dc3545;"></i>
-                {%endif%}</span>
-            </a>
-            {% if request.user.trabajador.notificar == 'si' %} 
-            <a href="javascript:;" onclick="notificar()" class="dropdown-item dropdown-footer">Desactivar</a>
-            {%else%}
-            <a href="javascript:;" onclick="notificar()" class="dropdown-item dropdown-footer">Activar</a>
-            {%endif%}
-          </div>
-        </li>
+      
       {% comment %}
       {% if user.is_superuser or user.is_staff %}
           <li class="nav-item">
@@ -115,13 +93,15 @@
           <i class="fas fa-user"></i>  {{ user.username }}
         </a>
       </li>
+      {% comment %}
       <li class="nav-item">
         <a class="nav-link" href="javascript:;"role="button">
           <i class="fas fa-user"></i>  {{ user.groups.first.name }}
         </a>
       </li>
+      {% endcomment %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}" role="button">
+        <a class="nav-link" href="{% url 'autenticar' %}" role="button">
           <i class="fas fa-power-off"></i> Salir
         </a>
       </li>

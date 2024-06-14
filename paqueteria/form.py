@@ -8,10 +8,31 @@ class UsuarioModelForm(UserCreationForm):
         fields = ('direccion', 'ciudad', 'estado', 'telefono', 'nro_cliente')
         
 class paquetesForm(forms.ModelForm):
-
-    identificado = forms.ModelChoiceField(
-        widget=forms.RadioSelect(attrs={'class': 'radio-label'},required=False )
+  
+    usuario = forms.ModelChoiceField(
+        queryset=Usuario.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'usuario'})    
     )
+    identificado = forms.ChoiceField(
+    choices=[(1, 'Si'), (2, 'No')],
+    initial='Si',
+    widget=forms.Select(attrs={'class': 'form-control','id': 'identificado'}),required=False
+      )
+    
+    numrastreo = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control','id':'numrastreo'}
+        )
+    )
+    
+    tienda_procedente = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control','id':'tienda_procedente'}
+        )
+    )
+    fecha_compra = forms.DateField(
+        widget=forms.TextInput(attrs={'class': 'form-control','id':'fecha_compra'}
+        )
+    )
+
     class Meta:
         model = Paquete
         fields=['numrastreo','fecha_compra','usuario','tienda_procedente','identificado']

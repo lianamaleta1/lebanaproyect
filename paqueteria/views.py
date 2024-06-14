@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from paqueteria.form import UsuarioModelForm,paquetesForm
+from paqueteria.models import *
+
 
 # Create your views here.
 def registration(request):
@@ -22,7 +24,7 @@ def autenticar(request):
     return render(request,'registration/autenticar.html')
 
 def listadpquetes(request):
-    paquetes=paquetes.objects.all()
+    paquetes=Paquete.objects.all()
     return render(request,'paquetes/listad.html',{'paquetes': paquetes})
 
 def addpquetes(request):
@@ -30,11 +32,8 @@ def addpquetes(request):
     if request.method=='POST':
         form= paquetesForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save()   
             return redirect(listadpquetes)
-        else:
-             form= paquetesForm()
-    
     else:           
         form= paquetesForm()
     
