@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Esta es la plantilla de solicitudes{% endblock %}
+
+
+{% block content %}
+
+  <h3 for="" style="position: relative;left: 217px;top: 19px;">Añadir un producto de esta compra:</h3>
+</br>
+     
+       {% if form %} 
+       <!-- {{form.as_p}}--> 
+       <div class="row">
+        <div class="col-md-4 text-center">
+            <form action="{% url 'addproductos' %}" method="post" id="paquete" enctype="multipart/form-data" style="position: relative;left: 217px;">
+                {% csrf_token %}           
+               
+                        {{form.as_p}}
+                        <div class="botones">
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                            
+                            <a type="submit" class="btn btn-warning" href="{%url 'listadproductos' %}">Cancelar</a>
+                        </div>               
+            </form>
+            
+        </div>
+                   
+    </div> 
+            {% endif %}  
+   
+           
+{% endblock %}  
+

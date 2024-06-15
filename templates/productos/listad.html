@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h2 style="font-weight: bolder; text-align: center;position:relative;top: 20px;"> Listado de paquetes</h2>
+<h2 style="font-weight: bolder; text-align: center;position:relative;top: 20px;"> Listado de productos</h2>
     
   
 <div class="row">
@@ -22,29 +22,23 @@
           <thead>
             <tr class="text-center">
       
-                <th scope="col">Número de rastreo</th>         
-                <th scope="col">Fecha de compra </th>
-                <th scope="col">Usuario </th>                        
-                <th scope="col">Tienda procedente</th>
-                <th scope="col">Acciones</th>
-
+                <th scope="col">Nombre</th>         
+                <th scope="col">Paquete </th>
+                <th scope="col">Categoría </th>                        
+                
              </tr>
            
           </thead>
           
           <tbody>
-            {% if paquetes %}
-              {% for i in paquetes %}
+            {% if productos %}
+              {% for i in productos %}
                   <tr>
                     
-                      <td>{{i.numrastreo}}</td>                     
-                      <td>{{i.fecha_compra}}</td>                     
-                      <td>{{i.usuario}}</td>
-                      <td>{{i.tienda_procedente}}</td>                      
-                      <td>      
-                        <a href="{% url 'addproductos' %}">Clasificar</a>      
-                    </td>
-                   
+                      <td>{{i.nombre}}</td>                     
+                      <td>{{i.paquete}}</td>                     
+                      <td>{{i.categprod}}</td>                      
+                      
                       
                   </tr> 
                   

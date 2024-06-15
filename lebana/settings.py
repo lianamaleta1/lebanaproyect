@@ -146,12 +146,12 @@ TEMPLATE_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-"""
+
 #Emails
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.fg.cu'
-EMAIL_HOST_USER = 'liana.maleta@fg.cu'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'lianamaleta1@gmail.com'
+EMAIL_HOST_PASSWORD = 'Brunito2021'
 EMAIL_PORT = 587
 
-"""
+
