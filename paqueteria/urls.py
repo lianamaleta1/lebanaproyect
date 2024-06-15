@@ -6,4 +6,5 @@ urlpatterns = [
  path('addpquetes/',views.addpquetes,name='addpquetes'),
  path('listadproductos/', views.listadproductos, name='listadproductos'),
  path('addproductos/',views.addproductos,name='addproductos'),
+ path('Clasifipque/<int:id>',views.Clasifipque,name='Clasifipque'),
 ]

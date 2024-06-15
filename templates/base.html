@@ -47,7 +47,7 @@
 
  
 </head>
-{% if user.is_authenticated %}
+
 <body class="hold-transition layout-top-nav text-sm layout-navbar-fixed">
 <div class="wrapper">
 
@@ -223,7 +223,5 @@
 
 </script>
 </body>
-{%else%}
-<a href="{% url 'login'%}">Autentiquese</a>
-{% endif %} 
+
 </html>

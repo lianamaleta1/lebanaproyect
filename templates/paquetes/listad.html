@@ -40,7 +40,10 @@
                       <td>{{i.numrastreo}}</td>                     
                       <td>{{i.fecha_compra}}</td>                     
                       <td>{{i.usuario}}</td>
-                      <td>{{i.tienda_procedente}}</td>                      
+                      <td>{{i.tienda_procedente}}</td> 
+                      <td>      
+                        <a href="{% url 'Clasifipque' i.id %}">Destino</a>      
+                    </td>                     
                       <td>      
                         <a href="{% url 'addproductos' %}">Clasificar</a>      
                     </td>
