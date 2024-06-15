@@ -4,25 +4,7 @@ from paqueteria.models import *
 from django.core.mail import send_mail
 from django.conf import settings
 
-# Create your views here.
-def registration(request):
-    
-    if request.method=='POST':
-        form= UsuarioModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(listadpquetes)
-        else:
-             form= UsuarioModelForm()
-    
-    else:           
-        form= UsuarioModelForm()
-    
-    return render(request,'registration/login.html',{'form': form})
 
-def autenticar(request):
-    
-    return render(request,'registration/autenticar.html')
 
 def listadpquetes(request):
     paquetes=Paquete.objects.all()
@@ -37,11 +19,10 @@ def addpquetes(request):
             if usuario is not None:
                usuario1=User.objects.get(first_name=usuario)
                email=usuario1.email
-               send_mail('Paqueteria Lebanapost', 'Hemos recibido su compra online' , settings.EMAIL_HOST_USER,[email], fail_silently=True)
-              
-            paueteGuardado=form.save() 
-            idpaquete=paueteGuardado.id
+            paueteGuardado=form.save()
+            idpaquete=paueteGuardado.pk
             Clasifipque(request,idpaquete) 
+            send_mail('Paqueteria Lebanapost', 'Hemos recibido su compra online' , settings.EMAIL_HOST_USER,[email], fail_silently=True)        
             return redirect(listadpquetes)
     else:           
         form= paquetesForm()

@@ -21,7 +21,7 @@
         
           <thead>
             <tr class="text-center">
-      
+              <th scope="col">Id</th> 
                 <th scope="col">Nombre</th>         
                 <th scope="col">Paquete </th>
                 <th scope="col">Categoría </th>                        
@@ -34,7 +34,7 @@
             {% if productos %}
               {% for i in productos %}
                   <tr>
-                    
+                      <td>{{i.id}}</td>
                       <td>{{i.nombre}}</td>                     
                       <td>{{i.paquete}}</td>                     
                       <td>{{i.categprod}}</td>                      

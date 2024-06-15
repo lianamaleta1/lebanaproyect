@@ -53,7 +53,11 @@ class Almacen (models.Model):
         
 #Modelo q representa la COMPRA
 class Paquete (models.Model):
-    
+    id = models.AutoField(
+        primary_key=True, 
+        editable = False, 
+        verbose_name = 'id',
+        )
     validez=[(1,'Si'),(2,'No')]
     numrastreo = models.CharField( max_length=100,default="")#seria como el tracking
     fecha_compra = models.DateField( max_length=2000, blank= True,null=True)
