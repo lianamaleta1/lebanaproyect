@@ -25,7 +25,11 @@ class Usuario (models.Model):
         db_table = 'usuario'
 
 class categoriAlmacen (models.Model):
-    
+    id = models.AutoField(
+        primary_key=True, 
+        editable = False, 
+        verbose_name = 'id',
+    )
     nombre = models.CharField( max_length=100,default="")
  
     def __str__(self):

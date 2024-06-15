@@ -32,13 +32,12 @@ def addpquetes(request):
 def Clasifipque(request,id):
     compra=Paquete.objects.get(pk=id)
     if compra is not None:   
-        catAlma=categoriAlmacen.objects.nombre="Compras Recibidas / Sin clasificar"
+        catAlma=categoriAlmacen.objects.filter(nombre="Compras Recibidas / Sin clasificar")
         if catAlma is not None:
-            win=catAlma.id
-            alm=Almacen.objects.get(categoria_almaceb=win)
-            if alm is not None:
-                compra.almacen=alm
-                compra.save()
+            gfg=catAlma.id
+            alm=Almacen.objects.get(categoria_almaceb=gfg)
+            compra.almacen=alm
+            compra.save()
         
     else:
      compra.clasificacion="Compra de usuario no identificada"
